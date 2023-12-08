@@ -26,6 +26,9 @@
 
 #include <algorithm>
 
+#include <stdexcept>
+#include <limits>
+
 using namespace std;
 
 void

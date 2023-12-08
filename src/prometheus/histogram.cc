@@ -2,6 +2,8 @@
 #include <cassert>          // for assert
 #include <iterator>
 #include <numeric>
+#include <stdexcept>
+#include <limits>
 
 #include "histogram.h"
 

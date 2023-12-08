@@ -65,7 +65,7 @@ errno_to_string(int e, string & s) {
     // XSI-compliant strerror_r returns int:  0 means success; a positive error
     // number should be returned on error, but glibc < 2.13 returns -1 and sets
     // errno.
-    int r = strerror_r(e, buf, sizeof(buf));
+    int r = std::atoi(strerror_r(e, buf, sizeof(buf)));
     if (r == 0) {
 	s += buf;
     } else {

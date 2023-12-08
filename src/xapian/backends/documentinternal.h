@@ -33,6 +33,8 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <stdexcept>
+#include <limits>
 
 class DocumentTermList;
 class DocumentValueList;
