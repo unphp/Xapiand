@@ -544,7 +544,16 @@ collect_callstack_sig_handler(int /*signum*/, siginfo_t* /*info*/, void* ptr)
 		#error Unsupported OS.
 	#endif
 #else
-	#error Unsupported architecture.
+	// #error Unsupported architecture.
+	#if defined(__FreeBSD__)
+		auto frame = uc ? ((const frameinfo*)uc->uc_mcontext.mc_rbp) : nullptr;
+	#elif defined(__linux__)
+		auto frame = uc ? ((const frameinfo*)uc->uc_mcontext.gregs[REG_RBP]) : nullptr;
+	#elif defined(__APPLE__)
+		auto frame = uc && uc->uc_mcontext ? ((const frameinfo*)uc->uc_mcontext->__ss.__rbp) : nullptr;
+	#else
+		#error Unsupported OS.
+	#endif
 #endif
 #ifdef __MACHINE_STACK_GROWS_UP
 	#define BELOW >
