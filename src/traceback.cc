@@ -543,8 +543,7 @@ collect_callstack_sig_handler(int /*signum*/, siginfo_t* /*info*/, void* ptr)
 	#else
 		#error Unsupported OS.
 	#endif
-#else
-	// #error Unsupported architecture.
+#elif defined(__aarch64__)
 	#if defined(__FreeBSD__)
 		auto frame = uc ? ((const frameinfo*)uc->uc_mcontext.mc_rbp) : nullptr;
 	#elif defined(__linux__)
@@ -554,6 +553,8 @@ collect_callstack_sig_handler(int /*signum*/, siginfo_t* /*info*/, void* ptr)
 	#else
 		#error Unsupported OS.
 	#endif
+#else
+	#error Unsupported architecture. 
 #endif
 #ifdef __MACHINE_STACK_GROWS_UP
 	#define BELOW >
